@@ -1,0 +1,18 @@
+<form action="{% url 'tracker:index' %}" method="post">
+    {% csrf_token %}
+    <h1>Track Product</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {{ form }}
+    <input type="submit" value="Add">
+</form>
+<hr>
+<h1>Products</h1>
+{% if product_list %}
+<ul>
+    {% for product in product_list %}
+    <li><a href="{% url 'tracker:detail' product.id %}">{{ product.link }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No products are available.</p>
+{% endif %}
